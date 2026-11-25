@@ -12,10 +12,10 @@ DROP TABLE IF EXISTS `match_results`;
 DROP TABLE IF EXISTS `matches`;
 DROP TABLE IF EXISTS `team_players`;
 DROP TABLE IF EXISTS `players`;
+DROP TABLE IF EXISTS `group_teams`;
 DROP TABLE IF EXISTS `teams`;
 DROP TABLE IF EXISTS `match_slots`;
 DROP TABLE IF EXISTS `venues`;
-DROP TABLE IF EXISTS `group_teams`;
 DROP TABLE IF EXISTS `groups`;
 DROP TABLE IF EXISTS `competition_rules`;
 DROP TABLE IF EXISTS `categories`;
@@ -100,17 +100,6 @@ CREATE TABLE `groups` (
   UNIQUE KEY `uq_groups_name` (`category_id`, `group_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- D2 Competitions: The teams placed in each group (result of the draw).
-CREATE TABLE `group_teams` (
-  `group_team_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identification number',
-  `group_id` INT NOT NULL COMMENT 'Group',
-  `team_id` INT NOT NULL COMMENT 'Team placed in the group',
-  PRIMARY KEY (`group_team_id`),
-  CONSTRAINT `fk_group_teams_group_id` FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_group_teams_team_id` FOREIGN KEY (`team_id`) REFERENCES `teams` (`team_id`) ON DELETE RESTRICT,
-  UNIQUE KEY `uq_group_teams_team_id` (`team_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 -- D3 Venues and Slots: A pitch that can be used for matches.
 CREATE TABLE `venues` (
   `venue_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique venue identification number',
@@ -154,6 +143,17 @@ CREATE TABLE `teams` (
   CONSTRAINT `fk_teams_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON DELETE RESTRICT,
   CONSTRAINT `fk_teams_manager_id` FOREIGN KEY (`manager_id`) REFERENCES `users` (`user_id`) ON DELETE RESTRICT,
   UNIQUE KEY `uq_teams_name` (`category_id`, `team_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- D2 Competitions: The teams placed in each group (result of the draw).
+CREATE TABLE `group_teams` (
+  `group_team_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique identification number',
+  `group_id` INT NOT NULL COMMENT 'Group',
+  `team_id` INT NOT NULL COMMENT 'Team placed in the group',
+  PRIMARY KEY (`group_team_id`),
+  CONSTRAINT `fk_group_teams_group_id` FOREIGN KEY (`group_id`) REFERENCES `groups` (`group_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_group_teams_team_id` FOREIGN KEY (`team_id`) REFERENCES `teams` (`team_id`) ON DELETE RESTRICT,
+  UNIQUE KEY `uq_group_teams_team_id` (`team_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- D4 Teams and Players: A player, recorded once and registered to a team through team_players.
