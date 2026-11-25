@@ -23,7 +23,7 @@ are included in `assets/vendor/`, so the system runs without an internet connect
    - Laragon: `C:\laragon\www\ligakita`
 
    With Git: open a terminal in `htdocs` (or `www`) and run
-   `git clone https://github.com/<owner>/ligakita.git`
+   `git clone https://github.com/ahmdabqri/LigaKita.git ligakita`
 3. Open phpMyAdmin (http://localhost/phpmyadmin), go to **Import** and import
    `database/ligakita.sql`. It creates the `ligakita` database with all 15 tables and the admin account.
 4. Optional: import `database/sample_data.sql` too. It adds fictional sample data
