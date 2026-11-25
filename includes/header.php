@@ -17,7 +17,7 @@ $menu = $isAdmin ? [
         ['Venues & Match Slots', 'admin/venues.php', 'geo-alt'],
     ],
     'Teams' => [
-        ['Registrations', null, 'clipboard-check'],
+        ['Registrations', 'admin/registrations.php', 'clipboard-check'],
         ['Team Manager Accounts', 'admin/accounts.php', 'people'],
     ],
     'Matches' => [
@@ -30,9 +30,9 @@ $menu = $isAdmin ? [
 ] : [
     'My team' => [
         ['Dashboard', 'manager/index.php', 'speedometer2'],
-        ['Team Registration', null, 'shield'],
-        ['Players', null, 'person-badge'],
-        ['Squad Status', null, 'person-check'],
+        ['Team Registration', 'manager/team.php', 'shield'],
+        ['Players', 'manager/players.php', 'person-badge'],
+        ['Squad Status', 'manager/squad.php', 'person-check'],
         ['Fixtures & Results', null, 'calendar3'],
     ],
     'Competition' => [
@@ -41,6 +41,10 @@ $menu = $isAdmin ? [
     ],
 ];
 
+if (!$isAdmin) {
+    $myTeams = my_teams($pdo, (int) $user['user_id']);
+    $ctxTeamId = $_SESSION['ctx_team'] ?? 0;
+}
 if ($isAdmin) {
     $ctxComp = current_competition($pdo);
     $ctxCat = current_category($pdo);
@@ -105,6 +109,17 @@ if ($isAdmin) {
                         <?php endforeach; ?>
                     </select>
                 </form>
+            <?php endif; ?>
+            <?php if (!$isAdmin && count($myTeams) > 1): ?>
+                <form method="get" class="d-none d-md-flex ctx">
+                    <select name="ctx_team" class="form-select form-select-sm" onchange="this.form.submit()" aria-label="Team">
+                        <?php foreach ($myTeams as $t): ?>
+                            <option value="<?= $t['team_id'] ?>" <?= $t['team_id'] == $ctxTeamId ? 'selected' : '' ?>>Team: <?= e($t['team_name'] . ' (' . $t['cat_name'] . ')') ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </form>
+            <?php elseif (!$isAdmin && $myTeams): ?>
+                <span class="d-none d-md-inline badge text-bg-light border fw-normal fs-6">Team: <?= e($myTeams[0]['team_name'] . ' (' . $myTeams[0]['cat_name'] . ')') ?></span>
             <?php endif; ?>
             <div class="dropdown">
                 <button class="user d-flex align-items-center gap-2 btn btn-link text-decoration-none text-reset p-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

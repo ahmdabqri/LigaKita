@@ -20,6 +20,8 @@ $stats = [
     ['Team managers', $count("SELECT COUNT(*) FROM users WHERE role = 'team_manager' AND status = 'active'"), 'Active accounts', 'people'],
 ];
 
+$pending = $comp ? $count("SELECT COUNT(*) FROM teams t JOIN categories k ON k.category_id = t.category_id WHERE k.competition_id = ? AND t.reg_status = 'pending'", [$comp['competition_id']]) : 0;
+
 $cats = [];
 if ($comp) {
     $s = $pdo->prepare("SELECT k.category_id, k.name,
@@ -40,6 +42,9 @@ $tick = fn (bool $ok) => $ok ? '<i class="bi bi-check-circle-fill text-success">
     <h1>Dashboard</h1>
     <p><?= $comp ? e($comp['name']) . ' · ' . e(FORMATS[$comp['format']]) . ' · ' . ucfirst($comp['status']) : 'Welcome to LigaKita. Start by creating a competition.' ?></p>
 </div>
+<?php if ($pending): ?>
+    <div class="alert alert-warning d-flex justify-content-between align-items-center"><span><i class="bi bi-clipboard-check me-1"></i><?= $pending ?> team registration(s) are waiting for approval.</span><a class="btn btn-sm btn-warning" href="<?= url('admin/registrations.php') ?>">Review now</a></div>
+<?php endif; ?>
 <div class="row g-3 mb-4">
     <?php foreach ($stats as [$label, $value, $note, $icon]): ?>
         <div class="col-sm-6 col-xl-3">

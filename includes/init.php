@@ -43,3 +43,4 @@ try {
 
 require __DIR__ . '/helpers.php';
 require __DIR__ . '/auth.php';
+require __DIR__ . '/teams.php';

@@ -13,7 +13,8 @@ are included in `assets/vendor/`, so the system runs without an internet connect
 | 1.0 User Management | lk_1001 Login / logout, lk_1002 Team manager accounts, change password | Done |
 | 2.0 Competition, Category and Group Management | lk_2001 Competitions, lk_2002 Categories, lk_2003 Competition rules, lk_2004 Groups | Done |
 | 3.0 Venue and Match Slot Management | lk_3001 Venues and match slots | Done |
-| 4.0 to 9.0 | Registration, players, fixtures, results, standings, reports | Not started (shown as "soon" in the menu) |
+| 4.0 Team and Player Registration | lk_4001 Register team, lk_4002 Register player and check eligibility, lk_4003 Approve registration, lk_4004 Squad status | Done |
+| 5.0 to 9.0 | Fixtures, results, knockout, standings, reports | Not started (shown as "soon" in the menu) |
 
 ## Running it on your computer (XAMPP or Laragon)
 
@@ -30,7 +31,8 @@ are included in `assets/vendor/`, so the system runs without an internet connect
 4. Optional: import `database/sample_data.sql` too. It adds fictional sample data
    (2 competitions, 4 categories, rules for U15, 12 team managers and 12 approved U15 teams)
    so the groups page has teams to draw,
-   plus 3 venues and 18 match slots on three Saturdays.
+   plus 3 venues and 18 match slots on three Saturdays, squads for the 12 U15 teams and four U17
+   registrations (three waiting for approval, one draft) to try the approval screen.
 5. Open http://localhost/ligakita/
 
 ### Logins
@@ -64,8 +66,14 @@ ligakita/
 │   ├── categories.php     lk_2002 Categories and age limits
 │   ├── rules.php          lk_2003 Competition rules
 │   ├── groups.php         lk_2004 Groups and group draw
-│   └── venues.php         lk_3001 Venues and match slots
+│   ├── venues.php         lk_3001 Venues and match slots
+│   └── registrations.php  lk_4003 Approve team registrations
 ├── manager/               Team manager pages
+│   ├── index.php          Dashboard (my teams and next step)
+│   ├── team.php           lk_4001 Register team
+│   ├── players.php        lk_4002 Register players and submit for approval
+│   └── squad.php          lk_4004 Squad status
+├── uploads/               Team logos and player photos (not stored in Git)
 ├── includes/              Config, database connection, login checks, shared layout
 ├── assets/                CSS, JavaScript and vendor libraries (Bootstrap)
 └── database/              ligakita.sql (structure) and sample_data.sql
@@ -78,3 +86,6 @@ ligakita/
 - Every form has a CSRF token; all output is escaped with `htmlspecialchars()`.
 - Pages check the user's role (admin or team manager) before showing anything.
 - New team manager accounts get a temporary password and must change it at first login.
+- Uploads must be real JPG or PNG images up to 2 MB and get random file names; `uploads/.htaccess`
+  stops scripts from running in that folder.
+- The sample players are fictional. Their MyKad numbers use place-of-birth code 00, which is never issued.

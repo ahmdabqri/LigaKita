@@ -11,4 +11,5 @@ desktop.ini
 # Uploads and logs created at runtime
 uploads/*
 !uploads/.gitkeep
+!uploads/.htaccess
 *.log
