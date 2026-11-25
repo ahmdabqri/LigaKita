@@ -1,0 +1,14 @@
+# Local settings (database password etc.) - never commit
+includes/config.local.php
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Uploads and logs created at runtime
+uploads/*
+!uploads/.gitkeep
+*.log
