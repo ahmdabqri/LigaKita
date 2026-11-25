@@ -14,7 +14,7 @@ $menu = $isAdmin ? [
         ['Categories', 'admin/categories.php', 'diagram-3'],
         ['Competition Rules', 'admin/rules.php', 'list-ol'],
         ['Groups', 'admin/groups.php', 'grid-3x2-gap'],
-        ['Venues & Match Slots', null, 'geo-alt'],
+        ['Venues & Match Slots', 'admin/venues.php', 'geo-alt'],
     ],
     'Teams' => [
         ['Registrations', null, 'clipboard-check'],

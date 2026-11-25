@@ -12,7 +12,8 @@ are included in `assets/vendor/`, so the system runs without an internet connect
 |---|---|---|
 | 1.0 User Management | lk_1001 Login / logout, lk_1002 Team manager accounts, change password | Done |
 | 2.0 Competition, Category and Group Management | lk_2001 Competitions, lk_2002 Categories, lk_2003 Competition rules, lk_2004 Groups | Done |
-| 3.0 to 9.0 | Venues, registration, players, fixtures, results, standings, reports | Not started (shown as "soon" in the menu) |
+| 3.0 Venue and Match Slot Management | lk_3001 Venues and match slots | Done |
+| 4.0 to 9.0 | Registration, players, fixtures, results, standings, reports | Not started (shown as "soon" in the menu) |
 
 ## Running it on your computer (XAMPP or Laragon)
 
@@ -28,7 +29,8 @@ are included in `assets/vendor/`, so the system runs without an internet connect
    `database/ligakita.sql`. It creates the `ligakita` database with all 15 tables and the admin account.
 4. Optional: import `database/sample_data.sql` too. It adds fictional sample data
    (2 competitions, 4 categories, rules for U15, 12 team managers and 12 approved U15 teams)
-   so the groups page has teams to draw.
+   so the groups page has teams to draw,
+   plus 3 venues and 18 match slots on three Saturdays.
 5. Open http://localhost/ligakita/
 
 ### Logins
@@ -61,7 +63,8 @@ ligakita/
 │   ├── competition_form.php  lk_2001 Create / edit competition
 │   ├── categories.php     lk_2002 Categories and age limits
 │   ├── rules.php          lk_2003 Competition rules
-│   └── groups.php         lk_2004 Groups and group draw
+│   ├── groups.php         lk_2004 Groups and group draw
+│   └── venues.php         lk_3001 Venues and match slots
 ├── manager/               Team manager pages
 ├── includes/              Config, database connection, login checks, shared layout
 ├── assets/                CSS, JavaScript and vendor libraries (Bootstrap)

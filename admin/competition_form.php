@@ -160,7 +160,7 @@ $formatHelp = ['league' => 'Round robin, all teams play each other', 'knockout' 
             <div class="list-group list-group-flush">
                 <a class="list-group-item list-group-item-action <?= $id ? '' : 'disabled' ?>" href="<?= url('admin/categories.php') ?>">1. Add categories and age limits</a>
                 <a class="list-group-item list-group-item-action <?= $id ? '' : 'disabled' ?>" href="<?= url('admin/rules.php') ?>">2. Set competition rules</a>
-                <span class="list-group-item text-muted">3. Add venues and match slots <small>(Module 3)</small></span>
+                <a class="list-group-item list-group-item-action <?= $id ? '' : 'disabled' ?>" href="<?= url('admin/venues.php') ?>">3. Add venues and match slots</a>
                 <span class="list-group-item text-muted">4. Open team registration <small>(Module 4)</small></span>
                 <a class="list-group-item list-group-item-action <?= $id ? '' : 'disabled' ?>" href="<?= url('admin/groups.php') ?>">5. Create groups after the draw</a>
             </div>

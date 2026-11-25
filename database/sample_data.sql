@@ -1,5 +1,6 @@
 -- LigaKita sample data for testing and demonstration (fictional names).
 -- Import AFTER ligakita.sql. Team manager logins: benutfc_mgr ... penerokfc_mgr, password manager123
+-- Includes 3 venues and 18 match slots (3 Saturdays) for Pontian District Youth Cup 2026.
 USE ligakita;
 
 INSERT INTO competitions (competition_id, created_by, name, season, organiser, format, start_date, end_date, description, status) VALUES
@@ -42,3 +43,30 @@ INSERT INTO teams (team_id, category_id, manager_id, team_name, short_name, orga
 (10, 2, 11, 'Rimba Terjun FC', 'RTF', 'Kelab Bola Sepak Rimba Terjun', 'Coach name 10', 'approved', '2026-11-20 10:00:00'),
 (11, 2, 12, 'Ayer Masin FC', 'AMF', 'Kelab Bola Sepak Ayer Masin', 'Coach name 11', 'approved', '2026-11-20 10:00:00'),
 (12, 2, 13, 'Penerok FC', 'PF', 'Kelab Bola Sepak Penerok', 'Coach name 12', 'approved', '2026-11-20 10:00:00');
+
+-- Module 3.0: venues and the match slots of the first three match days (group stage, U15).
+-- Each day has 3 venues x 2 kick-offs = 6 slots, enough for one round of 3 groups of 4.
+INSERT INTO venues (venue_id, name, town) VALUES
+(1, 'Padang Bandar Pontian', 'Pontian'),
+(2, 'Stadium Mini Benut', 'Benut'),
+(3, 'Padang Sekolah Kukup', 'Kukup');
+
+INSERT INTO match_slots (competition_id, venue_id, slot_date, kickoff, length_min) VALUES
+(1, 1, '2026-12-12', '08:00:00', 90),
+(1, 1, '2026-12-12', '09:30:00', 90),
+(1, 2, '2026-12-12', '08:00:00', 90),
+(1, 2, '2026-12-12', '09:30:00', 90),
+(1, 3, '2026-12-12', '08:00:00', 90),
+(1, 3, '2026-12-12', '09:30:00', 90),
+(1, 1, '2026-12-19', '08:00:00', 90),
+(1, 1, '2026-12-19', '09:30:00', 90),
+(1, 2, '2026-12-19', '08:00:00', 90),
+(1, 2, '2026-12-19', '09:30:00', 90),
+(1, 3, '2026-12-19', '08:00:00', 90),
+(1, 3, '2026-12-19', '09:30:00', 90),
+(1, 1, '2026-12-26', '08:00:00', 90),
+(1, 1, '2026-12-26', '09:30:00', 90),
+(1, 2, '2026-12-26', '08:00:00', 90),
+(1, 2, '2026-12-26', '09:30:00', 90),
+(1, 3, '2026-12-26', '08:00:00', 90),
+(1, 3, '2026-12-26', '09:30:00', 90);

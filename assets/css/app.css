@@ -49,3 +49,7 @@ body.app { background: #fafbfc; font-size: .925rem; }
     .content { padding: 16px; }
     .topbar { padding: 0 16px; }
 }
+
+/* Keep the top bar inside the screen on phones */
+.main { min-width: 0; }
+.topbar .crumb { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
